@@ -6,7 +6,8 @@ import {
   required,
   minLength,
   maxLength,
-  matchesPassword
+  matchesPassword,
+  asyncValidate
 } from '../validation'
 import './RegisterForm.css'
 
@@ -68,7 +69,9 @@ class RegisterForm extends Component {
 }
 
 RegisterForm = reduxForm({
-  form: 'register'
+  form: 'register',
+  asyncValidate,
+  asyncBlurFields: ['username']
   // validate
 })(RegisterForm)
 
