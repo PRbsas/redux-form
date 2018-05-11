@@ -1,15 +1,37 @@
 import React from 'react'
 // import ReactJson from 'react-json-view'
+import cx from 'classnames'
+
+const getValidityClassName = meta => {
+  if (meta.active) {
+    return
+  }
+  if (meta.touched && meta.invalid) {
+    return 'invalid'
+  }
+  if (meta.touched && meta.valid) {
+    return 'valid'
+  }
+}
 
 export const customInput = props => {
   const { label, input, type, meta } = props
   return (
-    <div>
-      <label>{label}</label>
-      <input {...input} type={type} />
-      {(meta.error && meta.touched) && (
-        <div style={{color: 'red'}}>{meta.error}</div>
+    <div
+      className={cx(
+        'custom-input-container',
+        { 'flex-row-reverse': type === 'checkbox' },
+        { dirty: meta.dirty },
+        getValidityClassName(meta)
       )}
+    >
+      <input {...input} type={type} />
+      <label>{label}</label>
+      {(meta.error &&
+        meta.touched) &&
+        !meta.active && (
+          <div className='feedback-text error-text'>{meta.error}</div>
+        )}
       {/* <ReactJson src={props} /> */}
     </div>
   )

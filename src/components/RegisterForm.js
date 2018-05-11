@@ -7,6 +7,7 @@ import {
   minLength,
   maxLength
 } from '../validation'
+import './RegisterForm.css'
 
 class RegisterForm extends Component {
   render () {
